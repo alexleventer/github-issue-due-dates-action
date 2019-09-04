@@ -5,6 +5,9 @@ inputs:
   GITHUB_TOKEN:
     description: GitHub token used to make API requests
     required: true
+branding:
+  icon: 'calendar'
+  color: 'purple'
 runs:
   using: 'node12'
   main: 'dist/app.js'
