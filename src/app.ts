@@ -5,7 +5,7 @@ import {datesToDue} from './utils/dateUtils';
 
 const run = async () => {
   try {
-    const githubToken = core.getInput('GITHUB_TOKEN');
+    const githubToken = core.getInput('GH_TOKEN');
     const ok = new Octokit(githubToken);
 
     const issues = await ok.listAllOpenIssues(context.repo.owner, context.repo.repo);
