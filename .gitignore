@@ -93,3 +93,4 @@ typings/
 dist/
 
 .idea/
+release.sh
