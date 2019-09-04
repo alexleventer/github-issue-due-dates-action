@@ -1,4 +1,6 @@
 {
+  "main": "dist/app.js",
+  "version": "1.0.1",
   "scripts": {
     "build": "tsc",
     "test": "jest"

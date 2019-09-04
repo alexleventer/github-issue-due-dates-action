@@ -2,7 +2,7 @@ name: ' GitHub Issue Due Dates Action'
 description: 'Add overdue labels to past-due GitHub issues'
 author: 'Alex Leventer'
 inputs:
-  GITHUB_TOKEN:
+  GH_TOKEN:
     description: GitHub token used to make API requests
     required: true
 branding:
