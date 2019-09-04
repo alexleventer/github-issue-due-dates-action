@@ -1,0 +1,10 @@
+name: ' GitHub Issue Due Dates Action'
+description: 'Add overdue labels to past-due GitHub issues'
+author: 'Alex Leventer'
+inputs:
+  GITHUB_TOKEN:
+    description: GitHub token used to make API requests
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/app.js'
