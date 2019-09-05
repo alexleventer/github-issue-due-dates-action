@@ -1,13 +1,13 @@
 # GitHub Issue Due Dates Action
 
 ## How it works:
-1. Add the following to the top of issues you'd like assign due dates to:
+1. Add the following to the top of issues you'd like to assign due dates to:
 ```
 ---
 due: 2019-09-19
 ---
 ```
-2. Create a .github/workflows/workflow.yml file with the following contents:
+2. Create a `.github/workflows/workflow.yml` file with the following contents:
 ```
 name: Main Workflow
 on:
@@ -23,4 +23,5 @@ jobs:
         env:
           GH_TOKEN: "${{ secrets.GH_TOKEN }}"
 ```
-3. Generate a GitHub token and add it to your repository secrets.
+3. Generate a [personal access GitHub token](https://github.com/settings/tokens).
+4 Add the following environment variable to your repository secrets: GH_TOKEN={{your personal access token}}
