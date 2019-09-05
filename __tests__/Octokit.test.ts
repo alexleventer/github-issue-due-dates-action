@@ -36,4 +36,9 @@ describe('Octokit', () => {
     const results = await gh.removeLabelFromIssue(TEST_REPO_AUTHOR, TEST_REPO_NAME, 'Test', issues[1].number);
     expect(results).toHaveLength(1);
   });
+
+  it('should get overdue issues', async () => {
+    const issues = await gh.listAllOpenIssues(TEST_REPO_AUTHOR, TEST_REPO_NAME);
+    const overdueIssues = await gh.getOverdueIssues(issues);
+  });
 });

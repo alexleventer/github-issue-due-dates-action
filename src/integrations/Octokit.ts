@@ -1,5 +1,6 @@
 import {GitHub, context} from '@actions/github';
 import fm from 'front-matter';
+import {OVERDUE_TAG_NAME} from '../constants';
 
 export default class Octokit {
   public client: GitHub;
@@ -58,6 +59,13 @@ export default class Octokit {
       if (meta.attributes && meta.attributes.due) {
         return Object.assign(issue, {due: meta.attributes.due});
       }
+    });
+  }
+
+  async getOverdueIssues(rawIssues: any[]) {
+    return rawIssues.filter(issue => {
+      const activeLabels = issue.labels.map(label => label.name);
+      return activeLabels.includes(OVERDUE_TAG_NAME);
     });
   }
 }
