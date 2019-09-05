@@ -1,7 +1,7 @@
 name: Main Workflow
 on:
   schedule:
-    - cron:  '*/10 * * * *'
+    - cron:  '*/5 * * * *'
 jobs:
   Ubuntu:
     name: Add labels to overdue issues
