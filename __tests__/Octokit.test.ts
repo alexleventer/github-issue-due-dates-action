@@ -6,6 +6,11 @@ describe('Octokit', () => {
   const GH_TOKEN = process.env.GH_TOKEN;
   const TEST_REPO_AUTHOR = 'alexleventer';
   const TEST_REPO_NAME = 'github-issue-due-dates';
+
+  if (!GH_TOKEN) {
+    throw new Error('Cannot run tests without GH_TOKEN environment variable');
+  }
+
   // @ts-ignore
   const gh = new Octokit(GH_TOKEN);
 
