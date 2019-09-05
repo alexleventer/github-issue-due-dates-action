@@ -1,9 +1,10 @@
 import * as core from '@actions/core';
 import {GitHub, context} from '@actions/github';
-import Octokit from './Octokit';
+import Octokit from './integrations/Octokit';
 import {datesToDue} from './utils/dateUtils';
+import {OVERDUE_TAG_NAME, NEXT_WEEK_TAG_NAME} from './constants';
 
-const run = async () => {
+export const run = async () => {
   try {
     const githubToken = core.getInput('GH_TOKEN');
     const ok = new Octokit(githubToken);
@@ -13,14 +14,19 @@ const run = async () => {
     results.forEach(async issue => {
       const daysUtilDueDate = await datesToDue(issue.due);
       if (daysUtilDueDate <= 7 && daysUtilDueDate > 0) {
-        await ok.addLabelToIssue(context.repo.owner, context.repo.repo, issue.number, ['Due in next week']);
+        await ok.addLabelToIssue(context.repo.owner, context.repo.repo, issue.number, [NEXT_WEEK_TAG_NAME]);
       } else if (daysUtilDueDate <= 0) {
-        await ok.removeLabelFromIssue(context.repo.owner, context.repo.repo, 'Due in next week', issue.number);
-        await ok.addLabelToIssue(context.repo.owner, context.repo.repo, issue.number, ['Overdue']);
+        await ok.removeLabelFromIssue(context.repo.owner, context.repo.repo, NEXT_WEEK_TAG_NAME, issue.number);
+        await ok.addLabelToIssue(context.repo.owner, context.repo.repo, issue.number, [OVERDUE_TAG_NAME]);
       }
     });
-  } catch (error) {
-    core.setFailed(error.message);
+    return {
+      ok: true,
+      issuesProcessed: results.length,
+    }
+  } catch (e) {
+    core.setFailed(e.message);
+    throw e;
   }
 };
 
