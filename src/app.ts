@@ -7,6 +7,11 @@ import {OVERDUE_TAG_NAME, NEXT_WEEK_TAG_NAME} from './constants';
 export const run = async () => {
   try {
     const githubToken = core.getInput('GH_TOKEN');
+
+    if (!githubToken) {
+      throw new Error('Missing GH_TOKEN environment variable');
+    }
+
     const ok = new Octokit(githubToken);
 
     const issues = await ok.listAllOpenIssues(context.repo.owner, context.repo.repo);
