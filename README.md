@@ -25,4 +25,4 @@ jobs:
           GH_TOKEN: "${{ secrets.GH_TOKEN }}"
 ```
 3. Generate a [personal access GitHub token](https://github.com/settings/tokens).
-4 Add the following environment variable to your repository secrets: `GH_TOKEN={{your personal access token}}`
+4. Add the following environment variable to your repository secrets: `GH_TOKEN={{your personal access token}}`.
