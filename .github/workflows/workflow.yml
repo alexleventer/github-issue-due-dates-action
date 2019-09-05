@@ -9,5 +9,5 @@ jobs:
     steps:
       - name: GitHub Issue Due Dates Action
         uses: alexleventer/github-issue-due-dates-action@1.0.6
-        env:
+        with:
           GH_TOKEN: "${{ secrets.GH_TOKEN }}"
