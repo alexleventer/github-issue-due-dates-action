@@ -1,10 +1,10 @@
 name: Main Workflow
 on:
   schedule:
-    - cron:  '0 * * * *'
+    - cron:  '*/10 * * * *'
 jobs:
   Ubuntu:
-    name: Add labels to issues
+    name: Add labels to overdue issues
     runs-on: ubuntu-latest
     steps:
       - name: GitHub Issue Due Dates Action
