@@ -1,4 +1,4 @@
-# GitHub Issue Due Dates Action
+# :calendar: GitHub Issue Due Dates Action
 Add due dates to GitHub issues - issues are automatically tagged with `Overdue` and `Due in 1 week` labels. 
 
 ## How it works:
