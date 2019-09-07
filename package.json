@@ -1,6 +1,7 @@
 {
   "main": "dist/app.js",
   "version": "1.0.7",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "test": "jest"
@@ -17,6 +18,7 @@
   "dependencies": {
     "@actions/core": "^1.0.0",
     "@actions/github": "^1.0.1",
+    "@slack/client": "^5.0.2",
     "front-matter": "^3.0.2",
     "moment": "^2.24.0"
   }
