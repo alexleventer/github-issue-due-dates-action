@@ -56,8 +56,10 @@ export default class Octokit {
     return rawIssues.filter(issue => {
       // TODO: Move into utils
       const meta: any = fm(issue.body);
-      if (meta.attributes && meta.attributes.due) {
-        return Object.assign(issue, {due: meta.attributes.due});
+
+      const due = meta.attributes && (meta.attributes.due || meta.attributes.Due);
+      if (meta.attributes && due) {
+        return Object.assign(issue, {due});
       }
     });
   }
