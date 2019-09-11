@@ -1,5 +1,5 @@
-name: ' GitHub Issue Due Dates Action'
-description: 'Add overdue labels to past-due GitHub issues'
+name: 'Due Dates'
+description: 'Manage due dates on issues'
 author: 'Alex Leventer'
 inputs:
   GH_TOKEN:
