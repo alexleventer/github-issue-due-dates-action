@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: GitHub Issue Due Dates Action
-        uses: alexleventer/github-issue-due-dates-action@master
-        env:
+        uses: alexleventer/github-issue-due-dates-action@1.0.6
+        with:
           GH_TOKEN: "${{ secrets.GH_TOKEN }}"
 ```
 3. Generate a [personal access GitHub token](https://github.com/settings/tokens).
