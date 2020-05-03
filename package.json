@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "release": "tsc && mkdir releases && zip -r releases/gh-issues-due-date-action-$(node -p \"require('./package.json').version\").zip dist/"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",

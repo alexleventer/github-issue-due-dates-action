@@ -94,3 +94,5 @@ dist/
 
 .idea/
 release.sh
+
+releases
