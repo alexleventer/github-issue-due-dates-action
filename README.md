@@ -2,7 +2,7 @@
 Add due dates to GitHub issues - issues are automatically tagged with `Overdue` and `Due in 1 week` labels. 
 
 ## How it works:
-1. Add the following to the top of issues you'd like to assign due dates to:
+1. Add the following snippet to the top of issues you'd like to assign due dates to:
 ```
 ---
 due: 2019-09-19
