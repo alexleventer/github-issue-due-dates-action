@@ -1,11 +1,10 @@
 {
   "main": "dist/app.js",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "test": "jest",
-    "release": "tsc && mkdir releases && zip -r releases/gh-issues-due-date-action-$(node -p \"require('./package.json').version\").zip ."
+    "test": "jest"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
