@@ -5,22 +5,22 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "release": "tsc && mkdir releases && zip -r releases/gh-issues-due-date-action-$(node -p \"require('./package.json').version\").zip dist/"
+    "release": "tsc && mkdir releases && zip -r releases/gh-issues-due-date-action-$(node -p \"require('./package.json').version\").zip ."
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/moment": "^2.13.0",
-    "@types/node": "^13.13.4",
-    "jest": "^25.5.4",
-    "jest-circus": "^25.5.4",
-    "ts-jest": "^25.4.0",
+    "@types/node": "^13.13.5",
+    "jest": "^26.0.1",
+    "jest-circus": "^26.0.1",
+    "ts-jest": "^25.5.1",
     "typescript": "^3.8.3"
   },
   "dependencies": {
     "@actions/core": "^1.2.4",
-    "@actions/github": "^2.1.1",
+    "@actions/github": "^2.2.0",
     "@slack/client": "^5.0.2",
     "front-matter": "^3.1.0",
-    "moment": "^2.25.1"
+    "moment": "^2.25.3"
   }
 }
