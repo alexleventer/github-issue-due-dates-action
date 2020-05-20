@@ -27,29 +27,31 @@ export default class Octokit {
     return data;
   }
 
-  async addLabelToIssue(owner: string, repo: string, issueNumber: number, labels: string[]) {
+  async addLabelToIssue(owner: string, repo: string, issue_number: number, labels: string[]) {
     const {data} = await this.client.issues.addLabels({
       owner,
       repo,
-      issue_number: issueNumber,
+      issue_number,
       labels,
     });
     return data;
   }
 
-  async removeLabelFromIssue(owner: string, repo: string, name: string, issue_number: number) {
-    try {
-      const {data} = await this.client.issues.removeLabel({
-        owner,
-        repo,
-        name,
-        issue_number,
-      });
-      return data;
-    } catch (e) {
-      // Do not throw error
-      return [];
-    }
+  async removeLabelsFromIssue(owner: string, repo: string, issue_number: number, labels: string[]) {
+    labels.forEach(async label => {
+      try {
+        const {data} = await this.client.issues.removeLabel({
+          owner,
+          repo,
+          issue_number,
+          label,
+        });
+        return data;
+      } catch (e) {
+        // Do not throw error
+        return [];
+      }
+    });
   }
 
   async getIssuesWithDueDate(rawIssues: any[]) {
