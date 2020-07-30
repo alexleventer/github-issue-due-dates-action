@@ -1,6 +1,5 @@
 # :calendar: GitHub Issue Due Dates Action
-Add due dates to GitHub issues - issues are automatically tagged with labels
-when they pass certain date thresholds, as defined by you.
+Add due dates to GitHub issues - issues are automatically tagged with labels when they pass certain date thresholds, as defined by you.
 
 ## How it works:
 1. Add the following snippet to the top of issues you'd like to assign due dates to:
