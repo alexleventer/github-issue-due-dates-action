@@ -39,7 +39,7 @@ export const run = async () => {
         await ok.addLabelToIssue(context.repo.owner, context.repo.repo, issue.number, [overdueLabel]);
         console.log(`Marked issue #${issue.number} as overdue`);
       } else {
-        for (interval of intervals) {
+        for (const interval of intervals) {
           if (daysUtilDueDate <= interval.days) {
             await ok.removeLabelsFromIssue(context.repo.owner, context.repo.repo, issue.number, intervalLabels);
             await ok.addLabelToIssue(context.repo.owner, context.repo.repo, issue.number, [interval.label]);
