@@ -1,6 +1,6 @@
 {
   "main": "dist/app.js",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
@@ -20,6 +20,7 @@
     "@actions/github": "^2.2.0",
     "@slack/client": "^5.0.2",
     "front-matter": "^3.1.0",
-    "moment": "^2.25.3"
+    "moment": "^2.25.3",
+    "yaml": "^1.10.0"
   }
 }

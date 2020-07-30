@@ -21,19 +21,19 @@ describe('Octokit', () => {
     await gh.addLabelToIssue(TEST_REPO_AUTHOR, TEST_REPO_NAME, issues[1].number, ['Test']);
     const updatedIssue = await gh.get(TEST_REPO_AUTHOR, TEST_REPO_NAME, issues[1].number);
     expect(updatedIssue.labels.map(label => label.name).join(', ')).toContain('Test');
-    await gh.removeLabelFromIssue(TEST_REPO_AUTHOR, TEST_REPO_NAME, 'Test', issues[1].number);
+    await gh.removeLabelsFromIssue(TEST_REPO_AUTHOR, TEST_REPO_NAME, issues[1].number, ['Test']);
   });
 
-  it('should remove label from issue without label', async () => {
+  it('should remove labels from issue without label', async () => {
     const issues = await gh.listAllOpenIssues(TEST_REPO_AUTHOR, TEST_REPO_NAME);
-    const results = await gh.removeLabelFromIssue(TEST_REPO_AUTHOR, TEST_REPO_NAME, 'Test', issues[0].number);
+    const results = await gh.removeLabelsFromIssue(TEST_REPO_AUTHOR, TEST_REPO_NAME, issues[0].number, ['Test']);
     expect(results).toHaveLength(0);
   });
 
   it('should remove label from issue with label', async () => {
     const issues = await gh.listAllOpenIssues(TEST_REPO_AUTHOR, TEST_REPO_NAME);
     await gh.addLabelToIssue(TEST_REPO_AUTHOR, TEST_REPO_NAME, issues[1].number, ['Test']);
-    const results = await gh.removeLabelFromIssue(TEST_REPO_AUTHOR, TEST_REPO_NAME, 'Test', issues[1].number);
+    const results = await gh.removeLabelsFromIssue(TEST_REPO_AUTHOR, TEST_REPO_NAME, issues[1].number, ['Test']);
     expect(results).toHaveLength(1);
   });
 

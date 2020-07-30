@@ -5,6 +5,14 @@ inputs:
   GH_TOKEN:
     description: GitHub token used to make API requests
     required: true
+  INTERVALS:
+    description: >-
+      A list containing a `label` to set when
+      the ticket is due in the specified `days`
+    required: true
+  OVERDUE_LABEL:
+    description: The label to set when an issue is overdue
+    required: false
 branding:
   icon: 'calendar'
   color: 'purple'
