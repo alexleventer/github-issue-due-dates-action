@@ -2,13 +2,13 @@ import * as core from '@actions/core';
 import {GitHub, context} from '@actions/github';
 import Octokit from './integrations/Octokit';
 import {datesToDue, byDays} from './utils/dateUtils';
-import YAML from 'yaml'
+import YAML from 'yaml';
 
 export const run = async () => {
   try {
     const githubToken = core.getInput('GH_TOKEN');
     const inputIntervals = core.getInput('INTERVALS');
-    const overdueLabel = core.getInput('OVERDUE_LABEL') || "OVERDUE";
+    const overdueLabel = core.getInput('OVERDUE_LABEL') || 'OVERDUE';
 
     if (!githubToken) {
       throw new Error('Missing GH_TOKEN environment variable');
@@ -39,7 +39,7 @@ export const run = async () => {
         await ok.addLabelToIssue(context.repo.owner, context.repo.repo, issue.number, [overdueLabel]);
         console.log(`Marked issue #${issue.number} as overdue`);
       } else {
-        for(interval of intervals) {
+        for (interval of intervals) {
           if (daysUtilDueDate <= interval.days) {
             await ok.removeLabelsFromIssue(context.repo.owner, context.repo.repo, issue.number, intervalLabels);
             await ok.addLabelToIssue(context.repo.owner, context.repo.repo, issue.number, [interval.label]);
@@ -48,7 +48,6 @@ export const run = async () => {
           }
         }
       }
-
     });
 
     return {
