@@ -2,6 +2,7 @@
 //! locale : Chinese (China) [zh-cn]
 //! author : suupic : https://github.com/suupic
 //! author : Zeno Zeng : https://github.com/zenozeng
+//! author : uu109 : https://github.com/uu109
 
 import moment from '../moment';
 
@@ -60,9 +61,21 @@ export default moment.defineLocale('zh-cn', {
     calendar: {
         sameDay: '[今天]LT',
         nextDay: '[明天]LT',
-        nextWeek: '[下]ddddLT',
+        nextWeek: function (now) {
+            if (now.week() !== this.week()) {
+                return '[下]dddLT';
+            } else {
+                return '[本]dddLT';
+            }
+        },
         lastDay: '[昨天]LT',
-        lastWeek: '[上]ddddLT',
+        lastWeek: function (now) {
+            if (this.week() !== now.week()) {
+                return '[上]dddLT';
+            } else {
+                return '[本]dddLT';
+            }
+        },
         sameElse: 'L',
     },
     dayOfMonthOrdinalParse: /\d{1,2}(日|月|周)/,
@@ -92,6 +105,8 @@ export default moment.defineLocale('zh-cn', {
         hh: '%d 小时',
         d: '1 天',
         dd: '%d 天',
+        w: '1 周',
+        ww: '%d 周',
         M: '1 个月',
         MM: '%d 个月',
         y: '1 年',

@@ -1,7 +1,7 @@
 //! moment.js locale configuration
 //! locale : Russian [ru]
 //! author : Viktorminator : https://github.com/Viktorminator
-//! Author : Menelion Elensúle : https://github.com/Oire
+//! author : Menelion Elensúle : https://github.com/Oire
 //! author : Коренберг Марк : https://github.com/socketpair
 
 import moment from '../moment';
@@ -20,6 +20,7 @@ function relativeTimeWithPlural(number, withoutSuffix, key) {
         mm: withoutSuffix ? 'минута_минуты_минут' : 'минуту_минуты_минут',
         hh: 'час_часа_часов',
         dd: 'день_дня_дней',
+        ww: 'неделя_недели_недель',
         MM: 'месяц_месяца_месяцев',
         yy: 'год_года_лет',
     };
@@ -57,7 +58,7 @@ export default moment.defineLocale('ru', {
         ),
     },
     monthsShort: {
-        // по CLDR именно "июл." и "июн.", но какой смысл менять букву на точку ?
+        // по CLDR именно "июл." и "июн.", но какой смысл менять букву на точку?
         format: 'янв._февр._мар._апр._мая_июня_июля_авг._сент._окт._нояб._дек.'.split(
             '_'
         ),
@@ -72,7 +73,7 @@ export default moment.defineLocale('ru', {
         format: 'воскресенье_понедельник_вторник_среду_четверг_пятницу_субботу'.split(
             '_'
         ),
-        isFormat: /\[ ?[Вв] ?(?:прошлую|следующую|эту)? ?\] ?dddd/,
+        isFormat: /\[ ?[Вв] ?(?:прошлую|следующую|эту)? ?] ?dddd/,
     },
     weekdaysShort: 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
     weekdaysMin: 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
@@ -89,7 +90,7 @@ export default moment.defineLocale('ru', {
     // полные названия с падежами
     monthsStrictRegex: /^(январ[яь]|феврал[яь]|марта?|апрел[яь]|ма[яй]|июн[яь]|июл[яь]|августа?|сентябр[яь]|октябр[яь]|ноябр[яь]|декабр[яь])/i,
 
-    // Выражение, которое соотвествует только сокращённым формам
+    // Выражение, которое соответствует только сокращённым формам
     monthsShortStrictRegex: /^(янв\.|февр?\.|мар[т.]|апр\.|ма[яй]|июн[ья.]|июл[ья.]|авг\.|сент?\.|окт\.|нояб?\.|дек\.)/i,
     longDateFormat: {
         LT: 'H:mm',
@@ -160,6 +161,8 @@ export default moment.defineLocale('ru', {
         hh: relativeTimeWithPlural,
         d: 'день',
         dd: relativeTimeWithPlural,
+        w: 'неделя',
+        ww: relativeTimeWithPlural,
         M: 'месяц',
         MM: relativeTimeWithPlural,
         y: 'год',
