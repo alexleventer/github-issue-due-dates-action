@@ -6,7 +6,7 @@ export const datesToDue = (date: string) => {
   return eventDate.diff(today, 'days');
 };
 
-export const byDays = (a: object, b: object) => {
+export const byDays = (a: any, b: any) => {
   switch(true) {
     case a.days < b.days:
       return -1;
