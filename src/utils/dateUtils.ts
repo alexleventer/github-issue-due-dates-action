@@ -5,14 +5,3 @@ export const datesToDue = (date: string) => {
   const today = moment();
   return eventDate.diff(today, 'days');
 };
-
-export const byDays = (a: any, b: any) => {
-  switch(true) {
-    case a.days < b.days:
-      return -1;
-    case a.days > b.days:
-      return 1;
-    default:
-      return 0;
-  }
-};
