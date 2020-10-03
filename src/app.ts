@@ -15,7 +15,7 @@ export const run = async () => {
 
     const issues = await ok.listAllOpenIssues(context.repo.owner, context.repo.repo);
     const results = await ok.getIssuesWithDueDate(issues);
-    results.forEach(async issue => {
+    for (const issue of results) {
       const daysUtilDueDate = await datesToDue(issue.due);
       if (daysUtilDueDate <= 7 && daysUtilDueDate > 0) {
         await ok.addLabelToIssue(context.repo.owner, context.repo.repo, issue.number, [NEXT_WEEK_TAG_NAME]);
@@ -23,7 +23,7 @@ export const run = async () => {
         await ok.removeLabelFromIssue(context.repo.owner, context.repo.repo, NEXT_WEEK_TAG_NAME, issue.number);
         await ok.addLabelToIssue(context.repo.owner, context.repo.repo, issue.number, [OVERDUE_TAG_NAME]);
       }
-    });
+    }
     return {
       ok: true,
       issuesProcessed: results.length,

@@ -12,6 +12,12 @@ describe('Octokit', () => {
   // @ts-ignore
   const gh = new Octokit(GH_TOKEN);
 
+  it('should list all open issues', async () => {
+    const issues = await gh.listAllOpenIssues(TEST_REPO_AUTHOR, TEST_REPO_NAME);
+    expect(issues).toBeInstanceOf(Array);
+    expect(issues[0].state).toEqual('open');
+  });
+
   it('should add label to issue', async () => {
     const issues = await gh.listAllOpenIssues(TEST_REPO_AUTHOR, TEST_REPO_NAME);
     const initialIssue = await gh.get(TEST_REPO_AUTHOR, TEST_REPO_NAME, issues[1].number);
@@ -38,5 +44,23 @@ describe('Octokit', () => {
   it('should get overdue issues', async () => {
     const issues = await gh.listAllOpenIssues(TEST_REPO_AUTHOR, TEST_REPO_NAME);
     const overdueIssues = await gh.getOverdueIssues(issues);
+    expect(overdueIssues).toHaveLength(0);
+    const newIssue = await gh.createIssue({
+      title: 'test issue',
+      repo: TEST_REPO_NAME,
+      owner: TEST_REPO_AUTHOR,
+      body: `---\ndue: 2019-09-01\n---`
+    });
+    const { data: {url, id, number} } = newIssue;
+    await gh.addLabelToIssue(TEST_REPO_AUTHOR, TEST_REPO_NAME, number, ['overdue']);
+    const updatedIssues = await gh.listAllOpenIssues(TEST_REPO_AUTHOR, TEST_REPO_NAME);
+    const updatedOverdueIssues = await gh.getOverdueIssues(updatedIssues);
+    expect(updatedOverdueIssues).toHaveLength(1);
+    await gh.updateIssue({
+      issue_number: number,
+      repo: TEST_REPO_NAME,
+      owner: TEST_REPO_AUTHOR,
+      state: 'closed'
+    })
   });
 });

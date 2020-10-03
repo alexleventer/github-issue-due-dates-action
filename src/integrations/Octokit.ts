@@ -70,4 +70,12 @@ export default class Octokit {
       return activeLabels.includes(OVERDUE_TAG_NAME);
     });
   }
+
+  async createIssue(options: any) {
+    return await this.client.issues.create(options);
+  }
+
+  async updateIssue(options: any) {
+    return await this.client.issues.update(options);
+  }
 }
