@@ -46,7 +46,7 @@ exports.run = () => __awaiter(void 0, void 0, void 0, function* () {
         const ok = new Octokit_1.default(githubToken);
         const issues = yield ok.listAllOpenIssues(github_1.context.repo.owner, github_1.context.repo.repo);
         const results = yield ok.getIssuesWithDueDate(issues);
-        results.forEach((issue) => __awaiter(void 0, void 0, void 0, function* () {
+        for (const issue of results) {
             const daysUtilDueDate = yield dateUtils_1.datesToDue(issue.due);
             if (daysUtilDueDate <= 7 && daysUtilDueDate > 0) {
                 yield ok.addLabelToIssue(github_1.context.repo.owner, github_1.context.repo.repo, issue.number, [constants_1.NEXT_WEEK_TAG_NAME]);
@@ -55,7 +55,7 @@ exports.run = () => __awaiter(void 0, void 0, void 0, function* () {
                 yield ok.removeLabelFromIssue(github_1.context.repo.owner, github_1.context.repo.repo, constants_1.NEXT_WEEK_TAG_NAME, issue.number);
                 yield ok.addLabelToIssue(github_1.context.repo.owner, github_1.context.repo.repo, issue.number, [constants_1.OVERDUE_TAG_NAME]);
             }
-        }));
+        }
         return {
             ok: true,
             issuesProcessed: results.length,

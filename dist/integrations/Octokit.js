@@ -87,5 +87,15 @@ class Octokit {
             });
         });
     }
+    createIssue(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.client.issues.create(options);
+        });
+    }
+    updateIssue(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.client.issues.update(options);
+        });
+    }
 }
 exports.default = Octokit;
