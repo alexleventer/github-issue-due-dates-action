@@ -1,6 +1,4 @@
 import Octokit from '../src/integrations/Octokit';
-import {datesToDue} from '../src/utils/dateUtils';
-import {OVERDUE_TAG_NAME, NEXT_WEEK_TAG_NAME} from '../src/constants';
 
 describe('Octokit', () => {
   const GH_TOKEN = process.env.GH_TOKEN;

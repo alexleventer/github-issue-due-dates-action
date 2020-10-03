@@ -1,12 +1,12 @@
-import {GitHub, context} from '@actions/github';
+import { getOctokit } from '@actions/github';
 import fm from 'front-matter';
-import {OVERDUE_TAG_NAME} from '../constants';
+import { OVERDUE_TAG_NAME } from '../constants';
 
 export default class Octokit {
-  public client: GitHub;
+  public client;
 
   constructor(token: string) {
-    this.client = new GitHub(token);
+    this.client = getOctokit(token);
   }
 
   async listAllOpenIssues(owner: string, repo: string) {

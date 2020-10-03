@@ -17,7 +17,7 @@ const front_matter_1 = __importDefault(require("front-matter"));
 const constants_1 = require("../constants");
 class Octokit {
     constructor(token) {
-        this.client = new github_1.GitHub(token);
+        this.client = github_1.getOctokit(token);
     }
     listAllOpenIssues(owner, repo) {
         return __awaiter(this, void 0, void 0, function* () {
