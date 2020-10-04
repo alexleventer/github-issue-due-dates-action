@@ -1,4 +1,4 @@
-name: Main Workflow
+name: Mark Tasks Overdue
 on:
   schedule:
     - cron:  '*/55 * * * *'
@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: GitHub Issue Due Dates Action
-        uses: alexleventer/github-issue-due-dates-action@1.0.6
+        uses: alexleventer/github-issue-due-dates-action@1.1.0
         with:
           GH_TOKEN: "${{ secrets.GH_TOKEN }}"
