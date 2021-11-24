@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: GitHub Issue Due Dates Action
-        uses: alexleventer/github-issue-due-dates-action@1.0.12
+        uses: alexleventer/github-issue-due-dates-action@1.2.0
         with:
           GH_TOKEN: "${{ secrets.GH_TOKEN }}"
 ```
