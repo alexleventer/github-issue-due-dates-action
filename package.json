@@ -1,4 +1,5 @@
 {
+  "name": "github-issue-due-dates-action",
   "main": "dist/app.js",
   "version": "1.1.0",
   "license": "MIT",

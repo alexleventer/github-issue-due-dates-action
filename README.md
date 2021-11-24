@@ -5,7 +5,7 @@ Add due dates to GitHub issues - issues are automatically tagged with `Overdue` 
 1. Add the following snippet to the top of issues you'd like to assign due dates to:
 ```
 ---
-due: 2019-09-19
+due: 2022-09-19
 ---
 ```
 2. Create a `.github/workflows/workflow.yml` file with the following contents:
