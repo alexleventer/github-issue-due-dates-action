@@ -21,6 +21,6 @@
     "@actions/github": "^4.0.0",
     "@slack/client": "^5.0.2",
     "front-matter": "^4.0.2",
-    "moment": "^2.29.1"
+    "moment": "^2.29.2"
   }
 }
