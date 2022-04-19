@@ -24,5 +24,7 @@ jobs:
         with:
           GH_TOKEN: "${{ secrets.GH_TOKEN }}"
 ```
-3. Generate a [personal access GitHub token](https://github.com/settings/tokens).
-4. Add the following environment variable to your repository secrets: `GH_TOKEN={{your personal access token}}`.
+3. Generate a [personal access GitHub token](https://github.com/settings/tokens) with the "workflow" scope.
+4. Add the following Actions secret to your repository (under Settings --> Security): 
+* Name: GH_TOKEN
+* Value: {{your personal access token}}
