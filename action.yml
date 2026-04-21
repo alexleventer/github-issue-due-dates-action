@@ -1,13 +1,42 @@
-name: 'Due Dates'
-description: 'Manage due dates on issues'
+name: 'GitHub Issue Due Dates'
+description: 'Label and optionally comment on issues whose YAML frontmatter contains a due date.'
 author: 'Alex Leventer'
-inputs:
-  GH_TOKEN:
-    description: GitHub token used to make API requests
-    required: true
 branding:
   icon: 'calendar'
   color: 'purple'
+inputs:
+  GH_TOKEN:
+    description: 'GitHub token used to read issues and manage labels/comments.'
+    required: true
+  overdue-label:
+    description: 'Label applied when an issue is overdue.'
+    required: false
+    default: 'Overdue'
+  upcoming-labels:
+    description: |
+      YAML list of upcoming-due thresholds. Each entry is { days, label }.
+      The smallest-matching threshold wins. Default: a single "Due in 1 week" bucket at 7 days.
+    required: false
+    default: |
+      - days: 7
+        label: 'Due in 1 week'
+  comment-on-overdue:
+    description: 'Optional comment template posted once when an issue becomes overdue. Supports {{daysUntil}}, {{dueDate}}, {{issueNumber}}. Leave empty to disable.'
+    required: false
+    default: ''
+  comment-on-upcoming:
+    description: 'Optional comment template posted once when an issue enters an upcoming-due bucket. Same template variables as comment-on-overdue.'
+    required: false
+    default: ''
+  dry-run:
+    description: 'If true, log planned changes without calling the GitHub API.'
+    required: false
+    default: 'false'
+outputs:
+  issues-processed:
+    description: 'Total open issues fetched.'
+  issues-changed:
+    description: 'Number of issues that had labels or comments updated.'
 runs:
-  using: 'node12'
-  main: 'dist/app.js'
+  using: 'node20'
+  main: 'dist/index.js'

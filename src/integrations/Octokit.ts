@@ -1,81 +1,62 @@
 import { getOctokit } from '@actions/github';
-import fm from 'front-matter';
-import { OVERDUE_TAG_NAME } from '../constants';
+import type { GitHub } from '@actions/github/lib/utils';
+
+export type GitHubClient = InstanceType<typeof GitHub>;
+
+export interface RepoIssue {
+  number: number;
+  body: string | null | undefined;
+  labels: string[];
+  pull_request?: unknown;
+}
 
 export default class Octokit {
-  public client;
+  public readonly client: GitHubClient;
 
   constructor(token: string) {
     this.client = getOctokit(token);
   }
 
-  async listAllOpenIssues(owner: string, repo: string) {
-    const {data} = await this.client.issues.listForRepo({
+  async listAllOpenIssues(owner: string, repo: string): Promise<RepoIssue[]> {
+    const raw = await this.client.paginate(this.client.rest.issues.listForRepo, {
       owner,
       repo,
       state: 'open',
+      per_page: 100,
     });
-    return data;
+    return raw
+      .filter((issue: any) => !issue.pull_request)
+      .map((issue: any) => ({
+        number: issue.number,
+        body: issue.body,
+        labels: (issue.labels || []).map((l: any) => (typeof l === 'string' ? l : l.name)).filter(Boolean),
+      }));
   }
 
-  async get(owner: string, repo: string, issueNumber: number) {
-    const {data} = await this.client.issues.get({
-      owner,
-      repo,
-      issue_number: issueNumber,
-    });
-    return data;
+  async addLabels(owner: string, repo: string, issue_number: number, labels: string[]): Promise<void> {
+    if (!labels.length) return;
+    await this.client.rest.issues.addLabels({ owner, repo, issue_number, labels });
   }
 
-  async addLabelToIssue(owner: string, repo: string, issueNumber: number, labels: string[]) {
-    const {data} = await this.client.issues.addLabels({
-      owner,
-      repo,
-      issue_number: issueNumber,
-      labels,
-    });
-    return data;
-  }
-
-  async removeLabelFromIssue(owner: string, repo: string, name: string, issue_number: number) {
+  async removeLabel(owner: string, repo: string, issue_number: number, name: string): Promise<void> {
     try {
-      const {data} = await this.client.issues.removeLabel({
-        owner,
-        repo,
-        name,
-        issue_number,
-      });
-      return data;
-    } catch (e) {
-      // Do not throw error
-      return [];
+      await this.client.rest.issues.removeLabel({ owner, repo, issue_number, name });
+    } catch (e: any) {
+      if (e?.status !== 404) throw e;
     }
   }
 
-  async getIssuesWithDueDate(rawIssues: any[]) {
-    return rawIssues.filter(issue => {
-      // TODO: Move into utils
-      const meta: any = fm(issue.body);
+  async createComment(owner: string, repo: string, issue_number: number, body: string): Promise<void> {
+    await this.client.rest.issues.createComment({ owner, repo, issue_number, body });
+  }
 
-      const due = meta.attributes && (meta.attributes.due || meta.attributes.Due);
-      if (meta.attributes && due) {
-        return Object.assign(issue, {due});
-      }
+  async listCommentsByBot(owner: string, repo: string, issue_number: number): Promise<string[]> {
+    const comments = await this.client.paginate(this.client.rest.issues.listComments, {
+      owner,
+      repo,
+      issue_number,
+      per_page: 100,
     });
-  }
-
-  async getOverdueIssues(rawIssues: any[]) {
-    return rawIssues.filter(issue => {
-      const activeLabels = issue.labels.map(label => label.name);
-      return activeLabels.includes(OVERDUE_TAG_NAME);
-    });
-  }
-
-  async createIssue(options: any) {
-    return await this.client.issues.create(options);
-  }
-
-  async updateIssue(options: any) {
-    return await this.client.issues.update(options);
+    return comments.map((c: any) => c.body || '');
   }
 }

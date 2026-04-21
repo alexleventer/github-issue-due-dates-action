@@ -1,2 +1,10 @@
-export const OVERDUE_TAG_NAME: string = 'Overdue';
-export const NEXT_WEEK_TAG_NAME: string = 'Due next week';
+export const OVERDUE_LABEL = 'Overdue';
+
+export interface UpcomingLabel {
+  days: number;
+  label: string;
+}
+
+export const DEFAULT_UPCOMING_LABELS: UpcomingLabel[] = [
+  { days: 7, label: 'Due in 1 week' },
+];
