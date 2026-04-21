@@ -1,6 +1,6 @@
 {
   "name": "github-issue-due-dates-action",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "GitHub Action that labels and optionally comments on issues based on a YAML-frontmatter due date.",
   "main": "dist/index.js",
   "license": "MIT",
