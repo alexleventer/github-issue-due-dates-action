@@ -1,13 +1,19 @@
 name: Mark Tasks Overdue
 on:
   schedule:
-    - cron:  '*/55 * * * *'
+    - cron: '*/55 * * * *'
+  workflow_dispatch:
+
 jobs:
-  Ubuntu:
-    name: Add labels to overdue issues
+  label-issues:
+    name: Label issues with due dates
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
     steps:
-      - name: GitHub Issue Due Dates Action
-        uses: alexleventer/github-issue-due-dates-action@1.1.0
+      - uses: actions/checkout@v4
+      - name: Run Due Dates action
+        uses: ./
         with:
-          GH_TOKEN: "${{ secrets.GH_TOKEN }}"
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
