@@ -3,7 +3,7 @@
 > Give GitHub Issues a real due date. This action reads a date from each issue's YAML frontmatter and keeps labels (and optionally comments) in sync.
 
 [![CI](https://github.com/alexleventer/github-issue-due-dates-action/actions/workflows/ci.yml/badge.svg)](https://github.com/alexleventer/github-issue-due-dates-action/actions/workflows/ci.yml)
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-GitHub%20Issue%20Due%20Dates-blue?logo=github)](https://github.com/marketplace/actions/github-issue-due-dates)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Due%20Dates-blue?logo=github)](https://github.com/marketplace/actions/due-dates)
 [![Release](https://img.shields.io/github/v/release/alexleventer/github-issue-due-dates-action?sort=semver)](https://github.com/alexleventer/github-issue-due-dates-action/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
